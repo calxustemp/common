@@ -1,14 +1,18 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3-alpine' 
-            args '-v /root/.m2:/root/.m2' 
-        }
-    }
+    agent none
     stages {
         stage('Build') { 
+            agent {
+                docker {
+                    image 'maven:3-alpine'
+                }
+            }
+            environment {
+                GH_TOKEN = credentials('GH_TOKEN')
+            }
             steps {
-                sh 'mvn -B -DskipTests clean package' 
+                sh 'mvn clean install'
+                sh 'mvn deploy -Dregistry=https://maven.pkg.github.com/calxus -Dtoken=$GH_TOKEN'
             }
         }
     }
