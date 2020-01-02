@@ -9,9 +9,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'mvn versions:set -DnewVersion=1.$BUILD_NUMBER'
                 sh 'mvn clean install -Duser.home=/var/maven'
-                sh 'mvn deploy -Dmaven.wagon.http.pool=false -Duser.home=/var/maven'
             }
         }
     }
