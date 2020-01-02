@@ -9,7 +9,6 @@ pipeline {
                 }
             }
             steps {
-                sh 'cat /var/maven/.m2/settings.xml'
                 sh 'mvn clean install -Duser.home=/var/maven'
                 sh 'mvn deploy -Dmaven.wagon.http.pool=false -Duser.home=/var/maven'
             }
