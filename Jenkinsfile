@@ -9,6 +9,7 @@ pipeline {
                 }
             }
             steps {
+                sh 'cat /root/.m2/settings.xml'
                 sh 'mvn clean install'
                 sh 'mvn deploy -Dmaven.wagon.http.pool=false'
             }
