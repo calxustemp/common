@@ -6,7 +6,7 @@
 
     <groupId>uk.co.adamsantiago</groupId>
     <artifactId>common</artifactId>
-    <version>1.0</version>
+    <version>1.9</version>
 
     <dependencies>
         <dependency>
@@ -57,5 +57,13 @@
             </plugin>
         </plugins>
     </build>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Calxus Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/calxus/common</url>
+        </repository>
+    </distributionManagement>
 
 </project>

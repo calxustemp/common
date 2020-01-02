@@ -5,14 +5,12 @@ pipeline {
             agent {
                 docker {
                     image 'maven:3-alpine'
+                    args '-v /root/.m2:/root/.m2:z'
                 }
-            }
-            environment {
-                GH_TOKEN = credentials('GH_TOKEN')
             }
             steps {
                 sh 'mvn clean install'
-                sh 'mvn deploy -Dregistry=https://maven.pkg.github.com/calxus -Dtoken=$GH_TOKEN'
+                sh 'mvn deploy -Dmaven.wagon.http.pool=false'
             }
         }
     }
