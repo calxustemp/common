@@ -1,4 +1,4 @@
-package io.adamgomez.common.services;
+package uk.co.adamsantiago.common.services;
 
 import java.sql.*;
 import java.util.ArrayList;

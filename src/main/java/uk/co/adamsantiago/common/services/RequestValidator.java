@@ -1,4 +1,4 @@
-package io.adamgomez.common.services;
+package uk.co.adamsantiago.common.services;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;

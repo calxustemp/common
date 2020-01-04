@@ -1,4 +1,4 @@
-package io.adamgomez.common.utils;
+package uk.co.adamsantiago.common.utils;
 
 import java.util.ArrayList;
 

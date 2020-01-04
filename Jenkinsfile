@@ -1,7 +1,21 @@
 pipeline {
     agent none
+    environment {
+        APPLICATION = 'common'
+    }
+    triggers {
+        pollSCM '* * * * *'
+    }
     stages {
-        stage('Build') { 
+        stage('Version') {
+            agent any
+            steps {
+                sh 'git tag 0.${BUILD_ID}.0'
+                sh 'git remote set-url origin git@github.com:calxus/${APPLICATION}.git'
+                sh 'git push origin --tags'
+            }
+        }
+        stage('Maven Build') { 
             agent {
                 docker {
                     image 'maven:3-alpine'
@@ -9,8 +23,8 @@ pipeline {
                 }
             }
             steps {
+                sh 'mvn versions:set -DnewVersion=0.${BUILD_ID}.0'
                 sh 'mvn clean install -Duser.home=/var/maven'
             }
-        }
     }
 }
