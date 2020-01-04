@@ -26,5 +26,6 @@ pipeline {
                 sh 'mvn versions:set -DnewVersion=0.${BUILD_ID}.0'
                 sh 'mvn clean install -Duser.home=/var/maven'
             }
+        }
     }
 }
