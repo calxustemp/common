@@ -15,6 +15,17 @@ pipeline {
                 sh 'git push origin --tags'
             }
         }
+        stage('Test') {
+            agent {
+                docker {
+                    image 'maven:3-alpine'
+                    args '-v /root/.m2:/var/maven/.m2 -e MAVEN_CONFIG=/var/maven/.m2'
+                }
+            }
+            steps {
+                sh 'mvn test'
+            }
+        }
         stage('Maven Build') { 
             agent {
                 docker {

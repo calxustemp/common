@@ -7,15 +7,14 @@ public class DBConnection {
 
     private String connectionString;
     private Connection connection;
-    private static String HOSTNAME = "adam.cbxucjjqy5m3.eu-west-1.rds.amazonaws.com";
-    private static String PORT = "3306";
-    private static String DATABASE = "ashilda";
-    private static String USERNAME = "admin";
-    private static String PASSWORD = "Carla890";
-    private static String COMPATABILITY_PARAMETERS = "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    private static String HOSTNAME = System.getenv("DB_HOSTNAME");
+    private static String PORT = System.getenv("DB_PORT");
+    private static String DATABASE = System.getenv("DB_NAME");
+    private static String USERNAME = System.getenv("DB_USERNAME");
+    private static String PASSWORD = System.getenv("DB_PASSWORD");
 
     public DBConnection() {
-        connectionString = "jdbc:mysql://" + HOSTNAME + ":" + PORT + "/" + DATABASE + COMPATABILITY_PARAMETERS;
+        connectionString = "jdbc:mysql://" + HOSTNAME + ":" + PORT + "/" + DATABASE;
         try {
             this.connection = DriverManager.getConnection(connectionString, USERNAME, PASSWORD);
         } catch (SQLException sqle) {
@@ -24,7 +23,7 @@ public class DBConnection {
     }
 
     public DBConnection(String hostname, String port, String database) {
-        connectionString = "jdbc:mysql://" + hostname + ":" + port + "/" + database + COMPATABILITY_PARAMETERS;
+        connectionString = "jdbc:mysql://" + hostname + ":" + port + "/" + database;
         try {
             this.connection = DriverManager.getConnection(connectionString, USERNAME, PASSWORD);
         } catch (SQLException sqle) {
