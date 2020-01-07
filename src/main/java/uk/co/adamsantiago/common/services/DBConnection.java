@@ -22,15 +22,6 @@ public class DBConnection {
         }
     }
 
-    public DBConnection(String hostname, String port, String database) {
-        connectionString = "jdbc:mysql://" + hostname + ":" + port + "/" + database;
-        try {
-            this.connection = DriverManager.getConnection(connectionString, USERNAME, PASSWORD);
-        } catch (SQLException sqle) {
-            System.out.println("Failed to connect to database using connection string: " + connectionString);
-        }
-    }
-
     public ResultSet executeQuery(String query) {
         try {
             Statement statement = connection.createStatement();
