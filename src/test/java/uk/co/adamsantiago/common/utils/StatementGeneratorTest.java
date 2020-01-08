@@ -38,7 +38,7 @@ public class StatementGeneratorTest {
 
         prepareColumnsAndValues(columns, values);
 
-        String expectedInsertStatement = "INSERT INTO user (first_name, last_name, email, password) VALUES (Gordon, Adam, gordon.adam@hotmail.co.uk, 5f4dcc3b5aa765d61d8327deb882cf99);";
+        String expectedInsertStatement = "INSERT INTO user (`first_name`, `last_name`, `email`, `password`) VALUES ('Gordon', 'Adam', 'gordon.adam@hotmail.co.uk', '5f4dcc3b5aa765d61d8327deb882cf99');";
         String insertStatement = StatementGenerator.insert(table, columns, values);
         
         assertEquals(expectedInsertStatement, insertStatement);

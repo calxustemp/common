@@ -18,6 +18,7 @@ public abstract class Statement {
     protected static String EQUALS = "=";
     protected static String SPACE = " ";
     protected static String COMMA = ",";
+    protected static String BACK_QUOTE = "`";
     protected static String APOSTROPHE = "'";
     protected static String SEMICOLON = ";";
 
@@ -54,11 +55,29 @@ public abstract class Statement {
         return sb.toString();
     }
 
-    protected static String generateInsertList(ArrayList<String> items) {
+    protected static String generateInsertColumnsList(ArrayList<String> items) {
         StringBuffer sb = new StringBuffer();
         sb.append(LEFT_BRACKET);
         for (int i = 0; i < items.size(); i++) {
+            sb.append(BACK_QUOTE);
             sb.append(items.get(i));
+            sb.append(BACK_QUOTE);
+            if (i != (items.size()-1)) {
+                sb.append(COMMA);
+                sb.append(SPACE);
+            }
+        }
+        sb.append(RIGHT_BRACKET);
+        return sb.toString();
+    }
+
+    protected static String generateInsertValuesList(ArrayList<String> items) {
+        StringBuffer sb = new StringBuffer();
+        sb.append(LEFT_BRACKET);
+        for (int i = 0; i < items.size(); i++) {
+            sb.append(APOSTROPHE);
+            sb.append(items.get(i));
+            sb.append(APOSTROPHE);
             if (i != (items.size()-1)) {
                 sb.append(COMMA);
                 sb.append(SPACE);

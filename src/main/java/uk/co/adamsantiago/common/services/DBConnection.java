@@ -1,9 +1,12 @@
 package uk.co.adamsantiago.common.services;
 
+import org.apache.log4j.Logger;
 import java.sql.*;
 import java.util.ArrayList;
 
 public class DBConnection {
+
+    final static Logger logger = Logger.getLogger(DBConnection.class);
 
     private String connectionString;
     private Connection connection;
@@ -18,7 +21,8 @@ public class DBConnection {
         try {
             this.connection = DriverManager.getConnection(connectionString, USERNAME, PASSWORD);
         } catch (SQLException sqle) {
-            System.out.println("Failed to connect to database using connection string: " + connectionString);
+            logger.error("Failed to connect to database using connection string: " + connectionString);
+            logger.debug(sqle.toString());
         }
     }
 
@@ -32,7 +36,8 @@ public class DBConnection {
                 return statement.executeQuery(query);
             }
         } catch (SQLException sqle) {
-            System.out.println("Failed to execute the query: " + query);
+            logger.error("Failed to execute query: " + query);
+            logger.debug(sqle.toString());
             return null;
         }
     }
@@ -45,7 +50,8 @@ public class DBConnection {
             }
             return statement.executeBatch();
         } catch (SQLException sqle) {
-            System.out.println("Failed to execute the query: " + queries);
+            logger.error("Failed to execute the query: " + queries);
+            logger.debug(sqle.toString());
             return null;
         }
     }
@@ -54,7 +60,8 @@ public class DBConnection {
         try {
             this.connection.close();
         } catch(SQLException sqle) {
-            System.out.println("Error closing connection");
+            logger.error("Error closing connection");
+            logger.debug(sqle.toString());
         }
     }
 }

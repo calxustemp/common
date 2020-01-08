@@ -13,11 +13,11 @@ public class Insert extends Statement {
         sb.append(SPACE);
         sb.append(table);
         sb.append(SPACE);
-        sb.append(generateInsertList(columns));
+        sb.append(generateInsertColumnsList(columns));
         sb.append(SPACE);
         sb.append(VALUES);
         sb.append(SPACE);
-        sb.append(generateInsertList(values));
+        sb.append(generateInsertValuesList(values));
         sb.append(SEMICOLON);
         statement = sb.toString();
     }
