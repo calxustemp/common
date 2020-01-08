@@ -18,6 +18,17 @@ public class StatementGeneratorTest {
         values.add("gordon.adam@hotmail.co.uk");
         values.add("5f4dcc3b5aa765d61d8327deb882cf99");
     }
+
+    public void prepareColumnsAndValues(ArrayList<String> columns, ArrayList<String> conditionColumns, ArrayList<String> conditionValues) {
+        columns.add("first_name");
+        columns.add("last_name");
+        
+        conditionColumns.add("id");
+        conditionColumns.add("email");
+
+        conditionValues.add("1");
+        conditionValues.add("gtadam@protonmail.ch");
+    }
     
     @Test
     public void testInsert() { 
@@ -60,5 +71,20 @@ public class StatementGeneratorTest {
         String updateStatement = StatementGenerator.update(table, columns, values, conditionColumn, conditionValue);
 
         assertEquals(expectedUpdateStatement, updateStatement);
+    }
+
+    @Test
+    public void testSelect() {
+        String table = "user";
+        ArrayList<String> columns = new ArrayList<String>();
+        ArrayList<String> conditionColumns = new ArrayList<String>();
+        ArrayList<String> conditionValues = new ArrayList<String>();
+
+        prepareColumnsAndValues(columns, conditionColumns, conditionValues);
+
+        String expectedSelectStatement = "SELECT first_name, last_name FROM user WHERE id=1 AND email=gtadam@protonmail.ch;";
+        String selectStatement = StatementGenerator.select(columns, table, conditionColumns, conditionValues);
+
+        assertEquals(expectedSelectStatement, selectStatement);
     }
 }
