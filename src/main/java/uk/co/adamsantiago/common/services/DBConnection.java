@@ -29,7 +29,7 @@ public class DBConnection {
     public ResultSet executeQuery(String query) {
         try {
             Statement statement = connection.createStatement();
-            if (query.startsWith("INSERT") || query.startsWith("UPDATE")) {
+            if (query.startsWith("INSERT") || query.startsWith("UPDATE") || query.startsWith("DELETE")) {
                 statement.executeUpdate(query, 1);
                 return statement.getGeneratedKeys();
             } else {
