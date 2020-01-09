@@ -16,10 +16,12 @@ public class Select extends Statement {
         sb.append(FROM);
         sb.append(SPACE);
         sb.append(table);
-        sb.append(SPACE);
-        sb.append(WHERE);
-        sb.append(SPACE);
-        sb.append(generateSelectConditionsList(conditionColumns, conditionValues));
+        if (!conditionColumns.isEmpty()) {
+            sb.append(SPACE);
+            sb.append(WHERE);
+            sb.append(SPACE);
+            sb.append(generateSelectConditionsList(conditionColumns, conditionValues));
+        }
         sb.append(SEMICOLON);
         statement = sb.toString();
     }
